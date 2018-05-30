@@ -42,7 +42,7 @@ index = np.arange(N)
 xtrain = X[index[index % 2 != 0], :] # 奇数番目の行の取り出し 
 ytrain = Y2[index[index % 2 != 0], :] # 同様
 xtest = X[index[index % 2 == 0], :] # 偶数番目の行の取り出し
-yans = Y[index[index % 2 == 0]] # 同様
+yans = Y[index[index % 2 == 0]] # 偶数番目の答えの行
 
 print(xtrain.shape)
 # print(ytrain.shape)
@@ -82,11 +82,11 @@ bs = 25
 for j in range(5000):
     sffindx = np.random.permutation(n)
     for i in range(0, n, bs):
-        """
+        '''
         # バッチ処理
         x = Variable(xtrain)
         y = Variable(ytrain)
-        """
+        '''
         x = Variable(xtrain[sffindx[i : (i + bs) if (i + bs) < n else n]])
         y = Variable(ytrain[sffindx[i : (i + bs) if (i + bs) < n else n]])
         model.cleargrads()
@@ -97,6 +97,7 @@ for j in range(5000):
 xt = Variable(xtest) # Chainerで用いれるように変換
 yt = model.fwd(xt) # 出力
 ans = yt.data # 答え
+print(ans.shape)
 nrow, ncol = ans.shape
 ok = 0
 
