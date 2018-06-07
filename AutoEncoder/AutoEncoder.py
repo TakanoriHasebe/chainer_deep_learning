@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 
 iris = datasets.load_iris()
 xtrain = iris.data.astype(np.float32)
-
+"""
 class MyAE(Chain):
     def __init__(self):
         super(MyAE, self).__init__(
@@ -60,13 +60,19 @@ for j in range(3000):
         optimizer.update()
         
 # pickle.dump(model, open('model.pkl','wb'), protocol=3 )
+"""
+
+with open('model.pkl', 'rb')\
+     as f: model = pickle.Unpickler(f).load()
 
 x = Variable(xtrain)
 yt = F.sigmoid(model.l1(x))
 ans = yt.data
+print(ans)
+
 ansx1 = ans[0:50,0]
 ansy1 = ans[0:50,1]
-ansx2 = ans[50:100,1]
+ansx2 = ans[50:100,0]
 ansy2 = ans[50:100,1]
 ansx3 = ans[100:150,0]
 ansy3 = ans[100:150,1]
